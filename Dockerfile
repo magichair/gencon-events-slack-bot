@@ -7,8 +7,14 @@ WORKDIR /app
 # Copy the current directory contents into the container
 COPY . /app
 
+# Install Poetry
+RUN pip install --no-cache-dir poetry
+
+# Configure Poetry to not use virtual environments
+RUN poetry config virtualenvs.create false
+
 # Install dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+RUN poetry install --no-root --no-dev
 
 # Expose the port the app runs on
 EXPOSE 3000
