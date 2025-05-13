@@ -14,7 +14,7 @@ RUN pip install --no-cache-dir poetry
 RUN poetry config virtualenvs.create false
 
 # Install dependencies
-RUN poetry install --no-root --no-dev
+RUN poetry install
 
 # Expose the port the app runs on
 EXPOSE 3000
