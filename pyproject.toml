@@ -1,0 +1,23 @@
+[project]
+name = "gencon-events-slack-bot"
+version = "0.0.1"
+description = "Simple Slackbot to give a better unfurl experience for gencon events links"
+authors = [
+    {name = "magichair"}
+]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "slack-bolt (>=1.23.0,<2.0.0)",
+    "requests (>=2.32.3,<3.0.0)",
+    "openpyxl (>=3.1.5,<4.0.0)",
+    "pytz (>=2025.2,<2026.0)"
+]
+
+[tool.poetry]
+package-mode = false
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
