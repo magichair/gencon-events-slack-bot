@@ -45,9 +45,11 @@ class Event:
     @staticmethod
     def format_datetime(datetime_str):
         try:
-            # Parse the datetime string in the format "MM/DD/YYYY HH:MM AM"
+            # Parse the datetime string in the format "MM/DD/YYYY HH:MM AM" as UTC
             dt = datetime.strptime(datetime_str, "%m/%d/%Y %I:%M %p")
-            # Convert to desired timezone (e.g., EDT)
+            utc_tz = pytz.utc
+            dt = utc_tz.localize(dt)  # Localize to UTC
+            # Convert to Eastern Time
             local_tz = pytz.timezone("US/Eastern")
             dt = dt.astimezone(local_tz)
             # Format as "Day, HH:MM AM/PM TZ"
