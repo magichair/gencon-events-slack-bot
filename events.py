@@ -45,13 +45,10 @@ class Event:
     @staticmethod
     def format_datetime(datetime_str):
         try:
-            # Parse the datetime string in the format "MM/DD/YYYY HH:MM AM" as UTC
+            # Parse the datetime string in the format "MM/DD/YYYY HH:MM AM" as Eastern Time
             dt = datetime.strptime(datetime_str, "%m/%d/%Y %I:%M %p")
-            utc_tz = pytz.utc
-            dt = utc_tz.localize(dt)  # Localize to UTC
-            # Convert to Eastern Time
             local_tz = pytz.timezone("US/Eastern")
-            dt = dt.astimezone(local_tz)
+            dt = local_tz.localize(dt)  # Localize to Eastern Time
             # Format as "Day, HH:MM AM/PM TZ"
             return dt.strftime("%A, %I:%M %p %Z")
         except Exception as e:
@@ -113,3 +110,47 @@ class Event:
             # e.g. https://www.gencon.com/events/274324
             events_dict[event.event_id] = event
         return events_dict
+
+# if __name__ == "__main__":
+#     # Test format_timezone function
+#     event = Event(
+#         game_id="ENT25ND274324",
+#         event_id="274324",
+#         group="Test Group",
+#         title="Test Event",
+#         short_description="Short description",
+#         long_description="Long description",
+#         event_type="Type",
+#         game_system="System",
+#         rules_edition="Edition",
+#         min_players=2,
+#         max_players=5,
+#         age_required=18,
+#         experience_required="None",
+#         materials_required="Yes",
+#         materials_details="Details",
+#         start_datetime="09/01/2023 10:00 AM",
+#         duration=2.5,
+#         end_datetime=None,
+#         gm_names="GM Name",
+#         website="http://example.com",
+#         email="",
+#         tournament="No",
+#         round_number=1,
+#         total_rounds=1,
+#         min_play_time=1,
+#         attendee_registration="Yes",
+#         cost=10.0,
+#         location="Location",
+#         room_name="Room",
+#         table_number="Table",
+#         special_category="Category",
+#         tickets_available=5,
+#         last_modified="2023-08-01"
+#     )
+#     print(event.start_datetime)  # Should print the formatted datetime
+#     print(event.duration)  # Should print the formatted duration
+#     print(event.cost)  # Should print the formatted cost
+#     print(event.format_datetime("09/01/2023 10:00 AM"))  # Test the static method
+#     print(event.format_duration(2.5))  # Test the static method
+#     print(event.format_duration(2))  # Test the static method
